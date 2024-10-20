@@ -50,6 +50,16 @@ void post(Node *root)
     post(root->right);
     printf("%d ", root->data);
 }
+
+void freeTree(Node *root)
+{
+    if (root == NULL)
+        return;
+    freeTree(root->left);
+    freeTree(root->right);
+    free(root);
+}
+
 int main()
 {
     printf("CreateBinary Tree");
@@ -58,4 +68,5 @@ int main()
     in(root);
     post(root);
     return 0;
+    freeTree(root);
 }
