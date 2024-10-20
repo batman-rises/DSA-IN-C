@@ -30,71 +30,25 @@ void pre(Node *root)
 {
     if (root == NULL)
         return;
-
-    Node *st[100];
-    int top = -1;
-    st[++top] = root;
-
-    while (top >= 0)
-    {
-
-        Node *node = st[top--];
-        printf("%d ", node->data);
-
-        if (node->right)
-            st[++top] = node->right;
-        if (node->left)
-            st[++top] = node->left;
-    }
+    printf("%d ", root->data);
+    pre(root->left);
+    pre(root->right);
 }
 void in(Node *root)
 {
     if (root == NULL)
         return;
-
-    Node *st[100];
-    int top = -1;
-    Node *node = root;
-    while (node != NULL || top >= 0)
-    {
-
-        while (node != NULL)
-        {
-            st[++top] = node;
-            node = node->left;
-        }
-        node = st[top--];
-        printf("%d", node->data);
-
-        node = node->right;
-    }
+    in(root->left);
+    printf("%d ", root->data);
+    in(root->right);
 }
 void post(Node *root)
 {
     if (root == NULL)
         return;
-
-    Node *st1[100];
-    Node *st2[100];
-    int top1 = -1;
-    int top2 = -1;
-
-    st1[++top1] = root;
-    while (top1 >= 0)
-    {
-        Node *node = st1[top1--];
-        st2[++top2] = node;
-
-        if (node->left)
-            st1[++top1] = node->left;
-        if (node->right)
-            st1[++top1] = node->right;
-    }
-    while (top2 >= 0)
-    {
-        Node *node = st2[top2--];
-        printf("%d ", node->data);
-    }
+    post(root->left);
+    post(root->right);
+    printf("%d ", root->data);
 }
 int main()
 {
