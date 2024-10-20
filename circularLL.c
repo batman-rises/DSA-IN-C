@@ -81,7 +81,7 @@ void deleteB(Node **head)
         return;
     }
     Node *temp = *head;
-    if (*head->next == *head)
+    if (*head->next == *head) // AVOID THIS CONDITION
     {
         free(*head);
         *head = NULL;
@@ -106,7 +106,7 @@ void deleteE(Node **head)
         return;
     }
 
-    if (*head->next == *head)
+    if (*head->next == *head) // AVOID THIS CONDITION
     {
         free(*head);
         *head = NULL;
@@ -132,7 +132,7 @@ void deleteK(Node **head, int k)
         return;
     }
 
-    if (*head->next == *head)
+    if (*head->next == *head) // AVOID THIS CONDITION
     {
         free(*head);
         *head = NULL;

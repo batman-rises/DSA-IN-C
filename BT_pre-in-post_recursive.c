@@ -15,40 +15,90 @@ Node *createNode(int data)
     newNode->left = newNode->right = NULL;
     return newNode;
 }
+
 Node *createTree()
 {
     int data;
-    printf("enter data");
+    printf("Enter data (or -1 to stop): ");
     scanf("%d", &data);
+
+    if (data == -1) // Use -1 to indicate no node (base case)
+        return NULL;
+
     Node *newNode = createNode(data);
-    printf("enter the left then right child of %d", data);
-    newNode->left = createTree();
-    newNode->right = createTree();
+    printf("Enter left child of %d:\n", data);
+    newNode->left = createTree(); // Recursive call for left child
+    printf("Enter right child of %d:\n", data);
+    newNode->right = createTree(); // Recursive call for right child
     return newNode;
 }
+
 void pre(Node *root)
 {
     if (root == NULL)
         return;
-    printf("%d ", root->data);
-    pre(root->left);
-    pre(root->right);
+
+    Node *st[100];
+    int top = -1;
+    st[++top] = root;
+    while (top >= 0)
+    {
+        Node *node = st[top--];
+        printf("%d ", node->data);
+        if (node->right)
+            st[++top] = node->right;
+        if (node->left)
+            st[++top] = node->left;
+    }
 }
+
 void in(Node *root)
 {
     if (root == NULL)
         return;
-    in(root->left);
-    printf("%d ", root->data);
-    in(root->right);
+
+    Node *st[100];
+    int top = -1;
+    Node *node = root; // Start from the root node
+    while (node != NULL || top >= 0)
+    {
+        while (node != NULL)
+        {
+            st[++top] = node;
+            node = node->left; // Go to the leftmost child
+        }
+        node = st[top--]; // Backtrack
+        printf("%d ", node->data);
+        node = node->right; // Visit the right subtree
+    }
 }
+
 void post(Node *root)
 {
     if (root == NULL)
         return;
-    post(root->left);
-    post(root->right);
-    printf("%d ", root->data);
+
+    Node *st1[100];
+    int top1 = -1;
+    Node *st2[100];
+    int top2 = -1;
+
+    st1[++top1] = root;
+    while (top1 >= 0)
+    {
+        Node *node = st1[top1--];
+        st2[++top2] = node; // Push to second stack
+
+        if (node->left)
+            st1[++top1] = node->left; // Left child first
+        if (node->right)
+            st1[++top1] = node->right; // Right child next
+    }
+    while (top2 >= 0)
+    {
+        Node *node = st2[top2--];
+        printf("%d ", node->data);
+    }
 }
 
 void freeTree(Node *root)
@@ -62,11 +112,14 @@ void freeTree(Node *root)
 
 int main()
 {
-    printf("CreateBinary Tree");
     Node *root = createTree();
+    printf("Pre-order Traversal: ");
     pre(root);
+    printf("\nIn-order Traversal: ");
     in(root);
+    printf("\nPost-order Traversal: ");
     post(root);
-    return 0;
+    printf("\n");
     freeTree(root);
+    return 0;
 }
