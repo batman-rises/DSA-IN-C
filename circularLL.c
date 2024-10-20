@@ -162,4 +162,62 @@ void display(Node *head)
 }
 int main()
 {
+    Node *head = NULL;
+    int choice, data, pos;
+
+    while (1)
+    {
+        printf("\n1. Insert at beginning\n");
+        printf("2. Insert at end\n");
+        printf("3. Insert at position\n");
+        printf("4. Delete from beginning\n");
+        printf("5. Delete from end\n");
+        printf("6. Delete from position\n");
+        printf("7. Display\n");
+        printf("8. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter data: ");
+            scanf("%d", &data);
+            insertB(&head, data);
+            break;
+        case 2:
+            printf("Enter data: ");
+            scanf("%d", &data);
+            insertE(&head, data);
+            break;
+        case 3:
+            printf("Enter position (0 for beginning): ");
+            scanf("%d", &pos);
+            printf("Enter data: ");
+            scanf("%d", &data);
+            insertK(&head, pos, data);
+            break;
+        case 4:
+            deleteB(&head);
+            break;
+        case 5:
+            deleteE(&head);
+            break;
+        case 6:
+            printf("Enter position to delete: ");
+            scanf("%d", &pos);
+            deleteK(&head, pos);
+            break;
+        case 7:
+            display(head);
+            break;
+        case 8:
+            exit(0);
+            break;
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
 }
