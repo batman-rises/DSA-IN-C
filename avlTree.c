@@ -57,6 +57,7 @@ Node *insert(Node *root, int data)
 {
     if (root == NULL)
         return createNode(data);
+
     if (root->data > data)
         root->left = insert(root->left, data);
     if (root->data < data)

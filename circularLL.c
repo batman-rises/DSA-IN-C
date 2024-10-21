@@ -65,13 +65,17 @@ void insertK(Node **head, int k, int data)
     Node *newNode = createNode(data);
     Node *temp = *head;
     int i = 0;
-    while (i < k - 1 && temp->next != *head)
+    while (temp->next != *head)
     {
-        temp = temp->next;
         i++;
+        if (i == (k - 1))
+        {
+            newNode->next = temp->next;
+            temp->next = newNode;
+            break;
+        }
+        temp = temp->next;
     }
-    newNode->next = temp->next;
-    temp->next = newNode;
 }
 void deleteB(Node **head)
 {

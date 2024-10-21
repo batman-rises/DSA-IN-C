@@ -20,8 +20,8 @@ Node *insert(Node *root, int data)
 {
     if (root == NULL)
         return createNode(data);
-    Node *cur = root;
-    while (1)
+    Node *cur = root; //
+    while (1)         // i forgot these two shits, remeber u gotta return root un tampered so store it in a temp variable
     {
         if (data < cur->data)
         {
@@ -53,13 +53,15 @@ Node *insert(Node *root, int data)
 // deletion
 Node *findRightMost(Node *root)
 {
+    if (root == NULL)
+        return NULL;
     if (root->right == NULL)
         return;
 
     return findRightMost(root->right);
 }
 
-Node *helper(Node *root)
+Node *helper(Node *root) // problem ho rha isme
 {
     if (root->left == NULL)
         return root->right;
@@ -71,7 +73,7 @@ Node *helper(Node *root)
     lastRightinLeft->right = rightChild;
     return root->left;
 }
-Node *delete(Node *root, int key)
+Node *delete(Node *root, int key) // problem ho rha isme
 {
     if (root == NULL)
         return NULL;
@@ -79,7 +81,7 @@ Node *delete(Node *root, int key)
         return helper(root);
 
     Node *dummy = root;
-    while (root != NULL)
+    while (root != NULL) // i forgot about this condition as well
     {
         if (root->data > key)
         {
